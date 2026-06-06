@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aconcagua K.K. — Luxury Ground Operator Japan</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A84C;
+    --gold-light: #dfc07a;
+    --gold-pale: #f0e4c0;
+    --ink: #0d0d0d;
+    --ink-soft: #1c1c1c;
+    --cream: #f7f4ee;
+    --cream-dark: #eee9df;
+    --stone: #7a7060;
+    --stone-light: #b0a898;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    font-size: 14px;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 40px;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--ink-soft);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1528360983277-13d401cdc186?w=1800&q=80');
+    background-size: cover;
+    background-position: center 40%;
+    opacity: 0.38;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+      rgba(13,13,13,0.3) 0%,
+      rgba(13,13,13,0.5) 50%,
+      rgba(13,13,13,0.88) 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-ornament {
+    width: 1px; height: 60px;
+    background: var(--gold);
+    margin: 0 auto 40px;
+    opacity: 0.7;
+    animation: fadeDown 1.2s ease forwards;
+  }
+
+  .hero-label {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.35em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.3s forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(52px, 8vw, 100px);
+    line-height: 1.0;
+    color: var(--cream);
+    margin-bottom: 14px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.5s forwards;
+  }
+
+  .hero h1 em { font-style: italic; color: var(--gold-light); }
+
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(17px, 2.2vw, 24px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--stone-light);
+    margin-bottom: 52px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.7s forwards;
+  }
+
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 36px;
+    opacity: 0;
+    animation: fadeUp 1s ease 0.9s forwards;
+  }
+
+  .hero-divider span { width: 40px; height: 1px; background: var(--gold); opacity: 0.5; }
+  .hero-divider i { font-family: 'Cinzel', serif; font-style: normal; font-size: 9px; letter-spacing: 0.3em; color: var(--stone-light); text-transform: uppercase; }
+
+  .hero-tagline {
+    font-family: 'Cinzel', serif;
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: var(--stone-light);
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 1s ease 1.1s forwards;
+  }
+
+  /* ─── SECTIONS COMMON ─── */
+  .section-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    color: var(--stone);
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  .section-label::before,
+  .section-label::after {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.6;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(36px, 5vw, 60px);
+    line-height: 1.1;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+
+  .section-title em { font-style: italic; color: var(--stone); }
+
+  /* ─── INTRO ─── */
+  .intro-wrap {
+    background: var(--cream);
+    padding: 100px 40px;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .intro-text {
+    font-size: 14px;
+    color: var(--stone);
+    line-height: 1.9;
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  /* ─── WHAT WE DO ─── */
+  .servicios-wrap {
+    background: var(--ink-soft);
+    padding: 100px 40px;
+  }
+
+  .servicios-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .servicios-header {
+    text-align: center;
+    margin-bottom: 70px;
+  }
+
+  .servicios-header .section-label { color: var(--gold); }
+  .servicios-header .section-label::before,
+  .servicios-header .section-label::after { opacity: 0.4; }
+  .servicios-header .section-title { color: var(--cream); }
+  .servicios-header .section-title em { color: var(--gold-light); }
+
+  .servicios-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2px;
+  }
+
+  .servicio-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(201,168,76,0.12);
+    padding: 48px 40px;
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+
+  .servicio-card:hover {
+    background: rgba(201,168,76,0.05);
+    border-color: rgba(201,168,76,0.25);
+  }
+
+  .servicio-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    opacity: 0.7;
+    margin-bottom: 24px;
+  }
+
+  .servicio-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--cream);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .servicio-titulo em { font-style: italic; color: var(--gold-light); }
+
+  .servicio-desc {
+    font-size: 13px;
+    color: var(--stone-light);
+    line-height: 1.8;
+  }
+
+  .servicio-linea {
+    width: 24px; height: 1px;
+    background: var(--gold);
+    opacity: 0.4;
+    margin-top: 32px;
+  }
+
+  /* ─── PARTNERS ─── */
+  .partners-wrap {
+    background: var(--cream-dark);
+    padding: 80px 40px;
+    text-align: center;
+  }
+
+  .partners-inner { max-width: 900px; margin: 0 auto; }
+
+  .partners-label {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    color: var(--stone);
+    text-transform: uppercase;
+    margin-bottom: 44px;
+  }
+
+  .partners-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1px;
+    background: rgba(201,168,76,0.12);
+    border: 1px solid rgba(201,168,76,0.12);
+  }
+
+  .partner-item {
+    background: var(--cream-dark);
+    padding: 32px 20px;
+    text-align: center;
+    transition: background 0.3s ease;
+  }
+
+  .partner-item:hover { background: var(--cream); }
+
+  .partner-icon {
+    font-family: serif;
+    font-size: 22px;
+    color: var(--gold);
+    opacity: 0.7;
+    margin-bottom: 12px;
+  }
+
+  .partner-name {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    color: var(--stone);
+    text-transform: uppercase;
+  }
+
+  /* ─── CIUDADES ─── */
+  .ciudades-wrap {
+    background: var(--cream);
+    padding: 80px 40px;
+    text-align: center;
+  }
+
+  .ciudades-inner { max-width: 900px; margin: 0 auto; }
+
+  .ciudades-lista {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0;
+    margin-top: 40px;
+  }
+
+  .ciudad-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 24px;
+  }
+
+  .ciudad-item:not(:last-child)::after {
+    content: '·';
+    color: var(--gold);
+    opacity: 0.5;
+    font-size: 18px;
+    margin-left: 20px;
+  }
+
+  .ciudad-nombre {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--ink);
+    letter-spacing: 0.05em;
+  }
+
+  .ciudad-jp {
+    font-family: serif;
+    font-size: 13px;
+    color: var(--stone);
+    opacity: 0.6;
+  }
+
+  /* ─── PROCESO ─── */
+  .proceso-wrap {
+    background: var(--ink-soft);
+    padding: 100px 40px;
+  }
+
+  .proceso-inner { max-width: 900px; margin: 0 auto; }
+
+  .proceso-header { text-align: center; margin-bottom: 70px; }
+  .proceso-header .section-label { color: var(--gold); }
+  .proceso-header .section-label::before,
+  .proceso-header .section-label::after { opacity: 0.4; }
+  .proceso-header .section-title { color: var(--cream); }
+  .proceso-header .section-title em { color: var(--gold-light); }
+
+  .proceso-steps {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    position: relative;
+  }
+
+  .proceso-steps::before {
+    content: '';
+    position: absolute;
+    top: 27px;
+    left: 10%; right: 10%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    opacity: 0.2;
+  }
+
+  .paso { padding: 0 20px; text-align: center; }
+
+  .paso-num {
+    width: 56px; height: 56px;
+    border: 1px solid rgba(201,168,76,0.35);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--gold);
+    margin: 0 auto 24px;
+    background: var(--ink-soft);
+    position: relative;
+    z-index: 1;
+  }
+
+  .paso-titulo {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: var(--cream);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .paso-desc { font-size: 12px; color: var(--stone-light); line-height: 1.7; }
+
+  /* ─── CONDICIONES ─── */
+  .condiciones-wrap {
+    background: var(--cream);
+    padding: 100px 40px;
+  }
+
+  .condiciones-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .condiciones-lista { list-style: none; }
+
+  .condiciones-lista li {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(122,112,96,0.15);
+    font-size: 13px;
+    color: var(--stone);
+    line-height: 1.7;
+  }
+
+  .condiciones-lista li:first-child { border-top: 1px solid rgba(122,112,96,0.15); }
+
+  .cond-icon {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
+    opacity: 0.6;
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+
+  /* ─── CIERRE ─── */
+  .cierre-wrap {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 40px;
+    position: relative;
+    overflow: hidden;
+    background: var(--ink-soft);
+  }
+
+  .cierre-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=1800&q=80');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.18;
+  }
+
+  .cierre-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(13,13,13,0.6) 0%, rgba(13,13,13,0.92) 100%);
+  }
+
+  .cierre-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .cierre-ornament {
+    width: 1px; height: 50px;
+    background: var(--gold);
+    margin: 0 auto 40px;
+    opacity: 0.5;
+  }
+
+  .cierre-inner .section-label { color: var(--gold); justify-content: center; }
+  .cierre-inner .section-label::before,
+  .cierre-inner .section-label::after { opacity: 0.4; }
+  .cierre-inner .section-title { color: var(--cream); margin-bottom: 20px; }
+  .cierre-inner .section-title em { color: var(--gold-light); }
+
+  .cierre-desc {
+    font-size: 14px;
+    color: var(--stone-light);
+    line-height: 1.9;
+    margin-bottom: 12px;
+  }
+
+  .cierre-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: var(--stone-light);
+    margin-bottom: 52px;
+  }
+
+  .cierre-divider {
+    width: 60px; height: 1px;
+    background: var(--gold);
+    opacity: 0.4;
+    margin: 0 auto 40px;
+  }
+
+  .cierre-contactos {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+  }
+
+  .cierre-contacto-label {
+    font-family: 'Cinzel', serif;
+    font-size: 8px;
+    letter-spacing: 0.3em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .cierre-contacto-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    color: var(--cream);
+  }
+
+  .btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  .btn {
+    font-family: 'Cinzel', serif;
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+
+  .btn-solid { background: var(--gold); color: var(--ink); border: 1px solid var(--gold); }
+  .btn-solid:hover { background: var(--gold-light); border-color: var(--gold-light); }
+  .btn-outline { background: transparent; color: var(--cream); border: 1px solid rgba(247,244,238,0.3); }
+  .btn-outline:hover { border-color: var(--cream); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink);
+    padding: 40px;
+    text-align: center;
+    border-top: 1px solid rgba(201,168,76,0.1);
+  }
+
+  .footer-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    margin-bottom: 8px;
+  }
+
+  .footer-sub { font-size: 11px; color: var(--stone); letter-spacing: 0.1em; margin-bottom: 6px; }
+  .footer-note { font-size: 10px; color: rgba(122,112,96,0.5); letter-spacing: 0.05em; }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to   { opacity: 0.7; transform: translateY(0); }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .proceso-steps { grid-template-columns: 1fr 1fr; gap: 40px; }
+    .proceso-steps::before { display: none; }
+    .condiciones-inner { grid-template-columns: 1fr; gap: 50px; }
+    .ciudad-item:not(:last-child)::after { display: none; }
+    .ciudades-lista { flex-direction: column; align-items: center; gap: 20px; }
+    .cierre-contactos { gap: 30px; }
+    .partners-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  @media (max-width: 480px) {
+    .proceso-steps { grid-template-columns: 1fr; }
+    .servicio-card { padding: 36px 28px; }
+    .hero, .intro-wrap, .servicios-wrap, .proceso-wrap, .condiciones-wrap { padding: 70px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-ornament"></div>
+    <p class="hero-label">Aconcagua K.K. · Kyoto, Japan</p>
+    <h1>Your partner<br>on the <em>ground.</em></h1>
+    <p class="hero-sub">Luxury ground operations across Japan.</p>
+    <div class="hero-divider">
+      <span></span>
+      <i>Based in Kyoto · Operating Nationwide</i>
+      <span></span>
+    </div>
+    <p class="hero-tagline">Kyoto · Tokyo · Osaka · Nara · Hiroshima · Hakone</p>
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro-wrap">
+  <p class="section-label">Who we are</p>
+  <h2 class="section-title">We operate Japan<br><em>from the inside.</em></h2>
+  <p class="intro-text">
+    Aconcagua K.K. is a luxury ground operator based in Kyoto. We work with hotels, golf courses, transport providers, venues and international agencies that need a reliable, high-level partner on the ground in Japan.
+    <br><br>
+    We don't sell travel packages. We provide the operational backbone that makes exceptional experiences possible — with the discretion, precision and local knowledge your clients deserve.
+  </p>
+</section>
+
+<!-- WHAT WE DO -->
+<section class="servicios-wrap">
+  <div class="servicios-inner">
+    <div class="servicios-header">
+      <p class="section-label">What we do</p>
+      <h2 class="section-title">Ground services,<br><em>at every level.</em></h2>
+    </div>
+    <div class="servicios-grid">
+
+      <div class="servicio-card">
+        <p class="servicio-num">01</p>
+        <h3 class="servicio-titulo">Specialist<br><em>Guides</em></h3>
+        <p class="servicio-desc">Local guides with deep cultural knowledge and high language proficiency. Available across Kyoto, Tokyo, Osaka, Nara, Hiroshima, Hakone and beyond — for individual travellers, groups and corporate delegations.</p>
+        <div class="servicio-linea"></div>
+      </div>
+
+      <div class="servicio-card">
+        <p class="servicio-num">02</p>
+        <h3 class="servicio-titulo">Logistics<br><em>Assistance</em></h3>
+        <p class="servicio-desc">End-to-end coordination on the ground: transfers, in-destination reservations, on-trip accompaniment and real-time problem solving. A single point of contact managing every detail, so nothing is left to chance.</p>
+        <div class="servicio-linea"></div>
+      </div>
+
+      <div class="servicio-card">
+        <p class="servicio-num">03</p>
+        <h3 class="servicio-titulo">Interpreter<br><em>Services</em></h3>
+        <p class="servicio-desc">Professional interpreters for business meetings, institutional visits, negotiations and corporate travel. Japanese, English and Spanish. Delivered with the discretion and precision that high-level engagements demand.</p>
+        <div class="servicio-linea"></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE WORK WITH -->
+<section class="partners-wrap">
+  <div class="partners-inner">
+    <p class="partners-label">Who we work with</p>
+    <div class="partners-grid">
+      <div class="partner-item">
+        <div class="partner-icon">⛳</div>
+        <p class="partner-name">Golf Courses</p>
+      </div>
+      <div class="partner-item">
+        <div class="partner-icon">旅</div>
+        <p class="partner-name">Ryokan & Hotels</p>
+      </div>
+      <div class="partner-item">
+        <div class="partner-icon">車</div>
+        <p class="partner-name">Transport</p>
+      </div>
+      <div class="partner-item">
+        <div class="partner-icon">会</div>
+        <p class="partner-name">Venues & Events</p>
+      </div>
+      <div class="partner-item">
+        <div class="partner-icon">✦</div>
+        <p class="partner-name">Travel Agencies</p>
+      </div>
+      <div class="partner-item">
+        <div class="partner-icon">企</div>
+        <p class="partner-name">Corporate</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CITIES -->
+<section class="ciudades-wrap">
+  <div class="ciudades-inner">
+    <p class="section-label">Operating across Japan</p>
+    <div class="ciudades-lista">
+      <div class="ciudad-item">
+        <span class="ciudad-nombre">Kyoto</span>
+        <span class="ciudad-jp">京都</span>
+      </div>
+      <div class="ciudad-item">
+        <span class="ciudad-nombre">Tokyo</span>
+        <span class="ciudad-jp">東京</span>
+      </div>
+      <div class="ciudad-item">
+        <span class="ciudad-nombre">Osaka</span>
+        <span class="ciudad-jp">大阪</span>
+      </div>
+      <div class="ciudad-item">
+        <span class="ciudad-nombre">Nara</span>
+        <span class="ciudad-jp">奈良</span>
+      </div>
+      <div class="ciudad-item">
+        <span class="ciudad-nombre">Hiroshima</span>
+        <span class="ciudad-jp">広島</span>
+      </div>
+      <div class="ciudad-item">
+        <span class="ciudad-nombre">Hakone</span>
+        <span class="ciudad-jp">箱根</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section class="proceso-wrap">
+  <div class="proceso-inner">
+    <div class="proceso-header">
+      <p class="section-label">How it works</p>
+      <h2 class="section-title">Simple.<br><em>Direct.</em></h2>
+    </div>
+    <div class="proceso-steps">
+      <div class="paso">
+        <div class="paso-num">1</div>
+        <p class="paso-titulo">Enquiry</p>
+        <p class="paso-desc">Tell us about your client or operational need. No forms, no bureaucracy.</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num">2</div>
+        <p class="paso-titulo">Proposal</p>
+        <p class="paso-desc">Within 5 business days, we send a fully tailored proposal at net rate.</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num">3</div>
+        <p class="paso-titulo">Confirmation</p>
+        <p class="paso-desc">All terms agreed in writing before any operation begins. No surprises.</p>
+      </div>
+      <div class="paso">
+        <div class="paso-num">4</div>
+        <p class="paso-titulo">Operation</p>
+        <p class="paso-desc">We handle everything on the ground. Your client is in expert hands.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORKING CONDITIONS -->
+<section class="condiciones-wrap">
+  <div class="condiciones-inner">
+    <div>
+      <p class="section-label" style="justify-content:flex-start;">How we<br>operate</p>
+      <h2 class="section-title">Clear.<br><em>Simple.</em><br>Professional.</h2>
+    </div>
+    <ul class="condiciones-lista">
+      <li><span class="cond-icon"></span>We work at <strong style="color:var(--ink)">net rates</strong>. Your margin is entirely your own.</li>
+      <li><span class="cond-icon"></span>Every proposal is <strong style="color:var(--ink)">fully customised</strong> — no standard packages, no fixed pricing.</li>
+      <li><span class="cond-icon"></span>We are <strong style="color:var(--ink)">flexible on brand visibility</strong>: we operate as Aconcagua or as a discreet background partner, as you prefer.</li>
+      <li><span class="cond-icon"></span>Direct support throughout via WhatsApp — for your team and your client on the ground.</li>
+      <li><span class="cond-icon"></span>Payment and cancellation terms <strong style="color:var(--ink)">agreed in writing</strong> before every engagement.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CLOSING / CONTACT -->
+<section class="cierre-wrap">
+  <div class="cierre-bg"></div>
+  <div class="cierre-overlay"></div>
+  <div class="cierre-inner">
+    <div class="cierre-ornament"></div>
+    <p class="section-label">Let's talk</p>
+    <h2 class="section-title">Ready to work<br><em>together?</em></h2>
+    <p class="cierre-desc">Tell us about your operation or upcoming client. We'll come back to you within 5 business days with a tailored proposal.</p>
+    <p class="cierre-sub">Every engagement is designed from scratch.</p>
+    <div class="cierre-divider"></div>
+    <div class="cierre-contactos">
+      <div>
+        <p class="cierre-contacto-label">WhatsApp</p>
+        <p class="cierre-contacto-value">+XX XXX XXX XXXX</p>
+      </div>
+      <div>
+        <p class="cierre-contacto-label">Email</p>
+        <p class="cierre-contacto-value">info@aconcagua.jp</p>
+      </div>
+      <div>
+        <p class="cierre-contacto-label">Web</p>
+        <p class="cierre-contacto-value">aconcagua.jp</p>
+      </div>
+    </div>
+    <div class="btns">
+      <a href="https://wa.me/XXXXXXXXXX" class="btn btn-solid">Contact via WhatsApp</a>
+      <a href="mailto:info@aconcagua.jp" class="btn btn-outline">Send an email</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-logo">ACONCAGUA K.K.</p>
+  <p class="footer-sub">Luxury Ground Operator · Kyoto, Japan</p>
+  <p class="footer-note">© 2026 Aconcagua Kabushiki Kaisha · All rights reserved</p>
+</footer>
+
+</body>
+</html>

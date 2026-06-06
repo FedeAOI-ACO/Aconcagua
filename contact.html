@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Aconcagua Co.,Ltd.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #9B804A;
+      --gold-light: #C4A96B;
+      --black: #0A0A0A;
+      --off-black: #111111;
+      --surface: #161616;
+      --text-primary: #F0EDE6;
+      --text-secondary: #A09A8E;
+      --text-muted: #5A5550;
+      --border: rgba(155, 128, 74, 0.2);
+      --border-subtle: rgba(240, 237, 230, 0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--text-primary);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAVBAR ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4rem;
+      height: 72px;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo svg { width: 36px; height: 36px; filter: brightness(0) invert(1); transition: opacity 0.2s; }
+    .nav-logo:hover svg { opacity: 0.7; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s ease; }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--gold-light); }
+    .nav-links a.active::after { width: 100%; }
+    .nav-cta { color: var(--gold) !important; border: 1px solid var(--border); padding: 8px 20px; border-radius: 2px; }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--black) !important; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .nav-hamburger span { display: block; width: 22px; height: 1px; background: var(--text-secondary); }
+
+    /* ─── PAGE HERO ─── */
+    .page-hero {
+      padding-top: 72px;
+      height: 38vh;
+      min-height: 260px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .page-hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?w=1600&q=80');
+      background-size: cover;
+      background-position: center 50%;
+    }
+    .page-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0.88) 100%);
+    }
+    .page-hero-content {
+      position: relative;
+      text-align: center;
+      padding: 0 2rem 3.5rem;
+      animation: fadeUp 1s ease 0.2s both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .page-hero-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .page-hero-eyebrow::before,
+    .page-hero-eyebrow::after { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); opacity: 0.6; }
+    .page-hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      font-weight: 300;
+      color: var(--text-primary);
+      line-height: 1.1;
+    }
+    .page-hero-title em { font-style: italic; color: var(--gold-light); }
+
+    /* ─── MAIN GRID ─── */
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 70vh;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    /* ─── LEFT: INFO + MAP ─── */
+    .contact-info {
+      padding: 5rem 4rem;
+      border-right: 1px solid var(--border-subtle);
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .section-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .section-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
+
+    .contact-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 300;
+      line-height: 1.15;
+      margin-bottom: 2rem;
+    }
+    .contact-title em { font-style: italic; color: var(--gold-light); }
+
+    .contact-details { display: flex; flex-direction: column; gap: 1.4rem; }
+
+    .contact-item {}
+    .contact-item-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.3rem;
+    }
+    .contact-item-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+    }
+    .contact-item-value a {
+      color: var(--gold-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-item-value a:hover { color: var(--text-primary); }
+
+    .map-wrap {
+      border: 1px solid var(--border-subtle);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .map-wrap iframe {
+      width: 100%;
+      height: 260px;
+      display: block;
+      filter: grayscale(30%) invert(90%) hue-rotate(180deg);
+      border: none;
+    }
+
+    /* ─── RIGHT: FORM ─── */
+    .contact-form-wrap {
+      padding: 5rem 4rem;
+    }
+
+    .form-intro {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      margin-bottom: 2.5rem;
+      max-width: 420px;
+    }
+
+    .form { display: flex; flex-direction: column; gap: 1.4rem; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+
+    .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+
+    .form-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .form-input,
+    .form-select,
+    .form-textarea {
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-primary);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      font-size: 0.88rem;
+      padding: 12px 16px;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.25s;
+      width: 100%;
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder { color: var(--text-muted); }
+
+    .form-input:focus,
+    .form-select:focus,
+    .form-textarea:focus { border-color: var(--gold); }
+
+    .form-select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235A5550' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      cursor: pointer;
+    }
+
+    .form-select option { background: var(--off-black); }
+
+    .form-textarea { resize: vertical; min-height: 130px; line-height: 1.7; }
+
+    .form-checkbox {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .form-checkbox input[type="checkbox"] {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      margin-top: 2px;
+      accent-color: var(--gold);
+      cursor: pointer;
+    }
+
+    .form-checkbox-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .btn-submit {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--gold);
+      border: 1px solid var(--gold);
+      padding: 15px 40px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: opacity 0.25s;
+      align-self: flex-start;
+      margin-top: 0.4rem;
+    }
+    .btn-submit:hover { opacity: 0.85; }
+
+    /* ─── FOOTER ─── */
+    .footer-strip {
+      border-top: 1px solid var(--border-subtle);
+      padding: 3rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 300; color: var(--text-secondary); }
+    .footer-brand strong { color: var(--text-primary); font-weight: 400; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text-secondary); }
+    .footer-copy { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.06em; }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; position: fixed; inset: 72px 0 0 0; background: rgba(10,10,10,0.97); flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+      .nav-links.open { display: flex; }
+      .nav-hamburger { display: flex; }
+      .contact-wrap { grid-template-columns: 1fr; }
+      .contact-info { padding: 3rem 1.5rem; border-right: none; border-bottom: 1px solid var(--border-subtle); }
+      .contact-form-wrap { padding: 3rem 1.5rem; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-strip { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <a href="/" class="nav-logo">
+      <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-label="Aconcagua">
+        <polygon points="30,6 8,50 52,50" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="30,6 20,28 40,28" fill="white"/>
+      </svg>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/#about">About</a></li>
+      <li><a href="/trading.html">Trading & Services</a></li>
+      <li><a href="/travel.html">Travel Services</a></li>
+      <li><a href="/founders.html">Our Founders</a></li>
+      <li><a href="/contact.html" class="nav-cta active">Contact Us</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <p class="page-hero-eyebrow">Aconcagua Co., Ltd.</p>
+      <h1 class="page-hero-title">Get in <em>Touch</em></h1>
+    </div>
+  </section>
+
+  <!-- CONTACT GRID -->
+  <div class="contact-wrap">
+
+    <!-- LEFT -->
+    <div class="contact-info">
+      <div>
+        <p class="section-label">Location & Contact</p>
+        <h2 class="contact-title">Find us in<br><em>Kyoto</em></h2>
+      </div>
+
+      <div class="contact-details">
+        <div class="contact-item">
+          <p class="contact-item-label">Address</p>
+          <p class="contact-item-value">〒602-8461<br>京都府京都市北区小路町2-17</p>
+        </div>
+        <div class="contact-item">
+          <p class="contact-item-label">Phone</p>
+          <p class="contact-item-value">
+            <a href="tel:+81070091437505">(+81) 07091437505</a>
+          </p>
+        </div>
+        <div class="contact-item">
+          <p class="contact-item-label">Email</p>
+          <p class="contact-item-value">
+            <a href="mailto:info@aconcagua.com">info@aconcagua.com</a>
+          </p>
+        </div>
+        <div class="contact-item">
+          <p class="contact-item-label">Web</p>
+          <p class="contact-item-value">
+            <a href="https://www.aconcagua.co.jp" target="_blank">aconcagua.co.jp</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Google Map — Kyoto Kitaku -->
+      <div class="map-wrap">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3266.9!2d135.7457!3d35.0472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6001087b5d59d041%3A0x9!2z5Lqs6YO95Zut5Yy65YyX5Yy65qCq5byP5Lya56S-!5e0!3m2!1sja!2sjp!4v1"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Aconcagua K.K. — Kyoto">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- RIGHT: FORM -->
+    <div class="contact-form-wrap">
+      <p class="section-label">Send a message</p>
+      <p class="form-intro">
+        Whether you're an agency, a business exploring Japan, or a traveller with a specific request — we'd love to hear from you. We respond within 5 business days.
+      </p>
+
+      <form class="form" action="https://formspree.io/f/meewelyr" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="name">Full name</label>
+            <input class="form-input" type="text" id="name" name="name" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="subject">Subject</label>
+          <select class="form-select" id="subject" name="subject">
+            <option value="" disabled selected>Select a topic</option>
+            <option value="trading">Trading & Services</option>
+            <option value="b2b">Travel — B2B / Ground Operations</option>
+            <option value="b2c">Travel — Private Journey</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="message">Message</label>
+          <textarea class="form-textarea" id="message" name="message" placeholder="Tell us about your enquiry…" required></textarea>
+        </div>
+
+        <label class="form-checkbox">
+          <input type="checkbox" name="marketing">
+          <span class="form-checkbox-label">I agree to receive occasional updates and relevant information from Aconcagua Co., Ltd.</span>
+        </label>
+
+        <button type="submit" class="btn-submit">Send message</button>
+      </form>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer-strip">
+    <div class="footer-brand">
+      <strong>アコンカグア 株式会社</strong> — Aconcagua Co., Ltd.
+    </div>
+    <ul class="footer-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/founders.html">Our Founders</a></li>
+      <li><a href="/sustainability.html">Sustainability</a></li>
+      <li><a href="/travel.html">Travel Services</a></li>
+    </ul>
+    <p class="footer-copy">© 2024 Aconcagua Co., Ltd. — Kyoto, Japan</p>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  </script>
+</body>
+</html>

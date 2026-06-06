@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sustainability — Aconcagua Co.,Ltd.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #9B804A;
+      --gold-light: #C4A96B;
+      --black: #0A0A0A;
+      --off-black: #111111;
+      --surface: #161616;
+      --text-primary: #F0EDE6;
+      --text-secondary: #A09A8E;
+      --text-muted: #5A5550;
+      --border: rgba(155, 128, 74, 0.2);
+      --border-subtle: rgba(240, 237, 230, 0.08);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--black);
+      color: var(--text-primary);
+      font-family: 'Outfit', sans-serif;
+      font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAVBAR ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4rem;
+      height: 72px;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo svg { width: 36px; height: 36px; filter: brightness(0) invert(1); transition: opacity 0.2s; }
+    .nav-logo:hover svg { opacity: 0.7; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s ease; }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--gold-light); }
+    .nav-links a.active::after { width: 100%; }
+    .nav-cta { color: var(--gold) !important; border: 1px solid var(--border); padding: 8px 20px; border-radius: 2px; }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--black) !important; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .nav-hamburger span { display: block; width: 22px; height: 1px; background: var(--text-secondary); }
+
+    /* ─── PAGE HERO ─── */
+    .page-hero {
+      padding-top: 72px;
+      height: 55vh;
+      min-height: 340px;
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+    .page-hero-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1800&q=80');
+      background-size: cover;
+      background-position: center 40%;
+    }
+    .page-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(10,10,10,0.85) 40%, rgba(10,10,10,0.2) 100%),
+                  linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.6) 100%);
+    }
+    .page-hero-content {
+      position: relative;
+      padding: 0 4rem 4rem;
+      animation: fadeUp 1s ease 0.2s both;
+      max-width: 680px;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .page-hero-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .page-hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); opacity: 0.6; }
+    .page-hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5.5vw, 4.2rem);
+      font-weight: 300;
+      color: var(--text-primary);
+      line-height: 1.08;
+      margin-bottom: 1.4rem;
+    }
+    .page-hero-title em { font-style: italic; color: var(--gold-light); }
+    .page-hero-lead {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      max-width: 520px;
+    }
+
+    /* ─── CONTENT ─── */
+    .content-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 7rem 4rem;
+    }
+
+    /* Intro statement */
+    .statement {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 6rem;
+      align-items: start;
+      padding-bottom: 6rem;
+      margin-bottom: 6rem;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .statement-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 100px;
+    }
+    .statement-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
+
+    .statement-body { font-size: 0.92rem; line-height: 1.95; color: var(--text-secondary); }
+    .statement-body p + p { margin-top: 1.4rem; }
+
+    /* Pillars */
+    .pillars-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-eyebrow {
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    .section-eyebrow::before,
+    .section-eyebrow::after { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); opacity: 0.5; }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      font-weight: 300;
+      color: var(--text-primary);
+      line-height: 1.1;
+    }
+    .section-title em { font-style: italic; color: var(--gold-light); }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border-subtle);
+      margin-bottom: 6rem;
+    }
+
+    .pillar {
+      background: var(--off-black);
+      padding: 2.5rem 2rem;
+      transition: background 0.3s;
+    }
+    .pillar:hover { background: var(--surface); }
+
+    .pillar-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 0.85rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+    }
+
+    .pillar-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--text-primary);
+      margin-bottom: 0.8rem;
+      line-height: 1.2;
+    }
+
+    .pillar-body {
+      font-size: 0.82rem;
+      line-height: 1.8;
+      color: var(--text-secondary);
+    }
+
+    /* Closing quote */
+    .closing {
+      text-align: center;
+      padding: 5rem 2rem;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .closing-quote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.4rem, 2.5vw, 2rem);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      max-width: 680px;
+      margin: 0 auto 2rem;
+    }
+
+    .closing-quote em { color: var(--gold-light); font-style: normal; }
+
+    .closing-attr {
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    /* ─── FOOTER ─── */
+    .footer-strip {
+      border-top: 1px solid var(--border-subtle);
+      padding: 3rem 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 300; color: var(--text-secondary); }
+    .footer-brand strong { color: var(--text-primary); font-weight: 400; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text-secondary); }
+    .footer-copy { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.06em; }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; position: fixed; inset: 72px 0 0 0; background: rgba(10,10,10,0.97); flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+      .nav-links.open { display: flex; }
+      .nav-hamburger { display: flex; }
+      .page-hero-content { padding: 0 1.5rem 3rem; }
+      .content-wrap { padding: 4rem 1.5rem; }
+      .statement { grid-template-columns: 1fr; gap: 2rem; }
+      .statement-label { position: static; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .footer-strip { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <a href="/" class="nav-logo">
+      <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-label="Aconcagua">
+        <polygon points="30,6 8,50 52,50" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="30,6 20,28 40,28" fill="white"/>
+      </svg>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/#about">About</a></li>
+      <li><a href="/trading.html">Trading & Services</a></li>
+      <li><a href="/travel.html">Travel Services</a></li>
+      <li><a href="/founders.html">Our Founders</a></li>
+      <li><a href="/contact.html" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <p class="page-hero-eyebrow">Our commitment</p>
+      <h1 class="page-hero-title">Empowering Change:<br>Our Commitment to<br><em>Sustainability</em></h1>
+      <p class="page-hero-lead">At the core of our organisation, nestled in the vibrant heart of Japan, lies a steadfast commitment to sustainability.</p>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <div class="content-wrap">
+
+    <!-- Statement -->
+    <div class="statement">
+      <p class="statement-label">Our philosophy</p>
+      <div class="statement-body">
+        <p>We take immense pride in our role as global connectors and catalysts for positive change. Our philosophy is rooted in fostering not only economic prosperity but also in nurturing the delicate balance between environmental stewardship and social responsibility.</p>
+        <p>Through our international trading and consultation services, we strive to be architects of positive change, actively contributing to the creation of a sustainable and equitable world. We believe in the power of forging cultural bridges that transcend borders, uniting diverse perspectives to build a future where harmony between humanity and the planet is paramount.</p>
+        <p>Our dedication to sustainability is reflected in every facet of our operations. We seek to minimise our environmental footprint, championing eco-friendly practices and embracing innovation to drive positive impact. In our interactions, we prioritise ethical considerations, ensuring that our partnerships and engagements uphold the highest standards of social responsibility.</p>
+        <p>By embracing sustainability as a guiding principle, we aim not only to endure but to thrive on the long term. We view sustainable growth as a journey that requires constant adaptation and collaboration. As we navigate the complexities of the global landscape, we are committed to being a beacon of responsible business practices, inspiring others to join us on the path towards a resilient, inclusive, and sustainable future.</p>
+      </div>
+    </div>
+
+    <!-- Pillars -->
+    <div class="pillars-header">
+      <p class="section-eyebrow">Our commitments</p>
+      <h2 class="section-title">How we <em>act</em></h2>
+    </div>
+
+    <div class="pillars-grid">
+      <div class="pillar">
+        <p class="pillar-num">01</p>
+        <h3 class="pillar-title">Environmental Stewardship</h3>
+        <p class="pillar-body">We minimise our environmental footprint across all operations, championing eco-friendly practices and embracing innovation to drive measurable positive impact.</p>
+      </div>
+      <div class="pillar">
+        <p class="pillar-num">02</p>
+        <h3 class="pillar-title">Social Responsibility</h3>
+        <p class="pillar-body">We prioritise ethical considerations in every engagement, ensuring our partnerships uphold the highest standards of fairness, inclusivity, and community benefit.</p>
+      </div>
+      <div class="pillar">
+        <p class="pillar-num">03</p>
+        <h3 class="pillar-title">Cultural Preservation</h3>
+        <p class="pillar-body">Through our work as cultural bridges, we actively support the preservation and celebration of Japanese heritage — connecting it with the world without diminishing it.</p>
+      </div>
+      <div class="pillar">
+        <p class="pillar-num">04</p>
+        <h3 class="pillar-title">Responsible Trade</h3>
+        <p class="pillar-body">We partner only with producers and suppliers whose practices align with our values — transparency, quality, and long-term relationships over short-term gain.</p>
+      </div>
+      <div class="pillar">
+        <p class="pillar-num">05</p>
+        <h3 class="pillar-title">Inclusive Growth</h3>
+        <p class="pillar-body">We believe sustainable growth must be equitable. Our business model is designed to create value for all stakeholders — partners, clients, communities, and the planet.</p>
+      </div>
+      <div class="pillar">
+        <p class="pillar-num">06</p>
+        <h3 class="pillar-title">Continuous Adaptation</h3>
+        <p class="pillar-body">Sustainability is a journey, not a destination. We commit to ongoing learning, honest assessment of our impact, and the courage to change course when needed.</p>
+      </div>
+    </div>
+
+    <!-- Closing quote -->
+    <div class="closing">
+      <p class="closing-quote">
+        "We are committed to being a beacon of responsible business practices — inspiring others to join us on the path towards a <em>resilient, inclusive, and sustainable future.</em>"
+      </p>
+      <p class="closing-attr">Aconcagua Co., Ltd. — Kyoto, Japan</p>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer-strip">
+    <div class="footer-brand">
+      <strong>アコンカグア 株式会社</strong> — Aconcagua Co., Ltd.
+    </div>
+    <ul class="footer-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/founders.html">Our Founders</a></li>
+      <li><a href="/trading.html">Trading & Services</a></li>
+      <li><a href="/contact.html">Contact Us</a></li>
+    </ul>
+    <p class="footer-copy">© 2024 Aconcagua Co., Ltd. — Kyoto, Japan</p>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  </script>
+</body>
+</html>
