@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trading — Aconcagua Co.,Ltd.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #9B804A; --gold-light: #C4A96B; --black: #0A0A0A; --off-black: #111111;
+      --surface: #161616; --text-primary: #F0EDE6; --text-secondary: #A09A8E;
+      --text-muted: #5A5550; --border: rgba(155,128,74,0.2); --border-subtle: rgba(240,237,230,0.08);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--text-primary); font-family: 'Outfit', 'Noto Serif JP', sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 4rem; height: 72px; background: rgba(10,10,10,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-subtle); }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo svg { width: 36px; height: 36px; filter: brightness(0) invert(1); transition: opacity 0.2s; }
+    .nav-logo:hover svg { opacity: 0.7; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'Outfit', 'Noto Serif JP', sans-serif; font-weight: 400; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s ease; }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--gold-light); }
+    .nav-links a.active::after { width: 100%; }
+    .nav-cta { color: var(--gold) !important; border: 1px solid var(--border); padding: 8px 20px; border-radius: 2px; }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--black) !important; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .nav-hamburger span { display: block; width: 22px; height: 1px; background: var(--text-secondary); }
+
+    .page-hero { padding-top: 72px; height: 38vh; min-height: 260px; position: relative; display: flex; align-items: flex-end; justify-content: center; overflow: hidden; }
+    .page-hero-bg { position: absolute; inset: 0; background-image: url('https://images.unsplash.com/photo-1474722883778-792e7990302f?w=1800&q=80'); background-size: cover; background-position: center 50%; }
+    .page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0.88) 100%); }
+    .page-hero-content { position: relative; text-align: center; padding: 0 2rem 3.5rem; animation: fadeUp 1s ease 0.2s both; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .page-hero-eyebrow { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.6rem; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .page-hero-eyebrow::before, .page-hero-eyebrow::after { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); opacity: 0.6; }
+    .page-hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 3.8rem); font-weight: 300; color: var(--text-primary); line-height: 1.1; }
+    .page-hero-title em { font-style: italic; color: var(--gold-light); }
+    .page-hero-jp { font-family: 'Noto Serif JP', serif; font-size: 0.7rem; letter-spacing: 0.18em; color: var(--text-muted); margin-top: 0.5rem; }
+
+    .back-bar { padding: 1.2rem 4rem; border-bottom: 1px solid var(--border-subtle); }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .back-link:hover { color: var(--gold-light); }
+    .back-link svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+    .split-entry { display: grid; grid-template-columns: 1fr 1fr; min-height: 72vh; border-top: 1px solid var(--border-subtle); }
+    .split-panel { position: relative; overflow: hidden; cursor: pointer; text-decoration: none; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding: 4rem; min-height: 480px; }
+    .split-panel:first-child { border-right: 1px solid var(--border-subtle); }
+    .split-panel-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.7s ease, filter 0.5s ease; filter: brightness(0.3) saturate(0.5); }
+    .split-panel:hover .split-panel-bg { transform: scale(1.04); filter: brightness(0.42) saturate(0.75); }
+    .split-panel-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.15) 60%); }
+    .split-panel-content { position: relative; text-align: center; }
+    .split-panel-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 300; color: var(--text-primary); line-height: 1.1; margin-bottom: 0.4rem; }
+    .split-panel-title em { font-style: italic; color: var(--gold-light); }
+    .split-panel-jp { font-family: 'Noto Serif JP', serif; font-size: 0.68rem; letter-spacing: 0.2em; color: var(--text-muted); margin-bottom: 1.2rem; }
+    .split-panel-desc { font-size: 0.84rem; font-weight: 300; line-height: 1.75; color: var(--text-secondary); max-width: 300px; margin: 0 auto 1.8rem; }
+    .split-panel-arrow { display: inline-flex; align-items: center; gap: 10px; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-light); transition: gap 0.3s; }
+    .split-panel:hover .split-panel-arrow { gap: 16px; }
+    .split-panel-arrow svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+    .footer-strip { border-top: 1px solid var(--border-subtle); padding: 3rem 4rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 300; color: var(--text-secondary); }
+    .footer-brand strong { color: var(--text-primary); font-weight: 400; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text-secondary); }
+    .footer-copy { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.06em; }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; position: fixed; inset: 72px 0 0 0; background: rgba(10,10,10,0.97); flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+      .nav-links.open { display: flex; }
+      .nav-hamburger { display: flex; }
+      .back-bar { padding: 1rem 1.5rem; }
+      .split-entry { grid-template-columns: 1fr; }
+      .split-panel:first-child { border-right: none; border-bottom: 1px solid var(--border-subtle); }
+      .split-panel { min-height: 360px; padding: 3rem 1.5rem; }
+      .footer-strip { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <a href="/" class="nav-logo">
+      <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-label="Aconcagua">
+        <polygon points="30,6 8,50 52,50" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="30,6 20,28 40,28" fill="white"/>
+      </svg>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/#about">About</a></li>
+      <li><a href="/trading.html" class="active">Trading & Services</a></li>
+      <li><a href="/travel.html">Travel Services</a></li>
+      <li><a href="/founders.html">Our Founders</a></li>
+      <li><a href="/contact.html" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <p class="page-hero-eyebrow">Trading & Services / トレーディング & サービス</p>
+      <h1 class="page-hero-title"><em>Trading</em> / トレーディング</h1>
+    </div>
+  </section>
+
+  <div class="back-bar">
+    <a href="/trading.html" class="back-link">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      Back to Trading & Services
+    </a>
+  </div>
+
+  <section class="split-entry">
+
+    <a href="/trading-vinos.html" class="split-panel">
+      <div class="split-panel-bg" style="background-image: url('https://images.unsplash.com/photo-1474722883778-792e7990302f?w=900&q=75');"></div>
+      <div class="split-panel-overlay"></div>
+      <div class="split-panel-content">
+        <h2 class="split-panel-title">Wine / <em>ワイン</em></h2>
+        <p class="split-panel-jp">ワイン / Wine</p>
+        <p class="split-panel-desc">Premium Argentine wines — curated directly from producer to the Japanese market. / アルゼンチンワインを産地から日本へ。</p>
+        <span class="split-panel-arrow">
+          Explore / 詳しく見る
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </div>
+    </a>
+
+    <a href="/trading-tropical.html" class="split-panel">
+      <div class="split-panel-bg" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=75');"></div>
+      <div class="split-panel-overlay"></div>
+      <div class="split-panel-content">
+        <h2 class="split-panel-title">Tropical <em>Produce</em> / トロピカル</h2>
+        <p class="split-panel-jp">トロピカル・フルーツ / Tropical Produce</p>
+        <p class="split-panel-desc">Avocados, mangoes, turmeric and ginger from certified producers — fresh to Japan. / 認定生産者からの新鮮なトロピカルフルーツ。</p>
+        <span class="split-panel-arrow">
+          Explore / 詳しく見る
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </span>
+      </div>
+    </a>
+
+  </section>
+
+  <footer class="footer-strip">
+    <div class="footer-brand"><strong>アコンカグア 株式会社</strong> — Aconcagua Co., Ltd.</div>
+    <ul class="footer-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/trading.html">Trading & Services</a></li>
+      <li><a href="/contact.html">Contact Us</a></li>
+    </ul>
+    <p class="footer-copy">© 2024 Aconcagua Co., Ltd. — Kyoto, Japan</p>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  </script>
+</body>
+</html>
