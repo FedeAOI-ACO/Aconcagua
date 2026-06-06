@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Consult — Services — Aconcagua Co.,Ltd.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --gold: #9B804A; --gold-light: #C4A96B; --black: #0A0A0A; --off-black: #111111; --surface: #161616; --text-primary: #F0EDE6; --text-secondary: #A09A8E; --text-muted: #5A5550; --border: rgba(155,128,74,0.2); --border-subtle: rgba(240,237,230,0.08); }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--text-primary); font-family: 'Outfit', 'Noto Serif JP', sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 4rem; height: 72px; background: rgba(10,10,10,0.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-subtle); }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo svg { width: 36px; height: 36px; filter: brightness(0) invert(1); transition: opacity 0.2s; }
+    .nav-logo:hover svg { opacity: 0.7; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s ease; }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--gold-light); }
+    .nav-links a.active::after { width: 100%; }
+    .nav-cta { color: var(--gold) !important; border: 1px solid var(--border); padding: 8px 20px; border-radius: 2px; }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--black) !important; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .nav-hamburger span { display: block; width: 22px; height: 1px; background: var(--text-secondary); }
+    .content { padding-top: 72px; display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
+    .content-img { position: relative; overflow: hidden; }
+    .content-img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(20%) brightness(0.6); display: block; }
+    .content-body { padding: 5rem 4rem; display: flex; flex-direction: column; justify-content: center; }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; margin-bottom: 3rem; transition: color 0.2s; }
+    .back-link:hover { color: var(--gold-light); }
+    .back-link svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+    .service-label { font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; }
+    .service-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
+    .service-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 4vw, 3.2rem); font-weight: 300; color: var(--text-primary); line-height: 1.08; margin-bottom: 0.4rem; }
+    .service-title em { font-style: italic; color: var(--gold-light); }
+    .service-jp { font-family: 'Noto Serif JP', serif; font-size: 0.78rem; letter-spacing: 0.12em; color: var(--text-muted); margin-bottom: 2rem; }
+    .service-body { font-size: 0.9rem; line-height: 1.9; color: var(--text-secondary); margin-bottom: 2.5rem; }
+    .service-body p + p { margin-top: 1.2rem; }
+    .services-list { border-top: 1px solid var(--border-subtle); margin-bottom: 3rem; }
+    .services-list-item { display: flex; align-items: center; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border-subtle); font-size: 0.84rem; color: var(--text-secondary); }
+    .services-list-item::before { content: ''; display: block; width: 5px; height: 5px; border-radius: 50%; background: var(--gold); opacity: 0.6; flex-shrink: 0; }
+    .btn-contact { display: inline-flex; align-items: center; gap: 10px; font-size: 0.78rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--black); background: var(--gold); border: 1px solid var(--gold); padding: 14px 32px; border-radius: 2px; text-decoration: none; transition: opacity 0.25s; }
+    .btn-contact:hover { opacity: 0.85; }
+    .footer-strip { border-top: 1px solid var(--border-subtle); padding: 3rem 4rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 300; color: var(--text-secondary); }
+    .footer-brand strong { color: var(--text-primary); font-weight: 400; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text-secondary); }
+    .footer-copy { font-size: 0.72rem; color: var(--text-muted); }
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; position: fixed; inset: 72px 0 0 0; background: rgba(10,10,10,0.97); flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+      .nav-links.open { display: flex; }
+      .nav-hamburger { display: flex; }
+      .content { grid-template-columns: 1fr; }
+      .content-img { height: 280px; }
+      .content-body { padding: 3rem 1.5rem; }
+      .footer-strip { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <a href="/" class="nav-logo"><svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"><polygon points="30,6 8,50 52,50" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/><polygon points="30,6 20,28 40,28" fill="white"/></svg></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/#about">About</a></li>
+      <li><a href="/trading.html" class="active">Trading & Services</a></li>
+      <li><a href="/travel.html">Travel Services</a></li>
+      <li><a href="/founders.html">Our Founders</a></li>
+      <li><a href="/contact.html" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+  <div class="content">
+    <div class="content-img"><img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=900&q=80" alt="Trading"></div>
+    <div class="content-body">
+      <a href="/trading-services.html" class="back-link"><svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg> Back to Services</a>
+      <p class="service-label">02 — Services</p>
+      <h1 class="service-title">Accomplish with<br><em>Aconcagua Consult</em></h1>
+      <p class="service-jp">コンサルティング</p>
+      <div class="service-body">
+        <p>In the dynamic world of international trading, our focus is on establishing long-term partnerships that transcend borders. We are dedicated to connecting businesses and enabling the seamless exchange of goods and services.</p>
+        <p>Leveraging our extensive network and profound expertise in navigating international markets, our goal is to stimulate economic growth and foster mutually advantageous opportunities for our valued partners.</p>
+      </div>
+      <div class="services-list">
+        <div class="services-list-item">Market Entry Strategy</div>
+        <div class="services-list-item">Company Constitution in Japan</div>
+        <div class="services-list-item">Cultural Adaptation Training</div>
+        <div class="services-list-item">Regulatory Compliance Assistance</div>
+        <div class="services-list-item">Partner Identification & Due Diligence</div>
+      </div>
+      <a href="/contact.html" class="btn-contact">Get in touch</a>
+    </div>
+  </div>
+  <footer class="footer-strip">
+    <div class="footer-brand"><strong>アコンカグア 株式会社</strong> — Aconcagua Co., Ltd.</div>
+    <ul class="footer-links"><li><a href="/">Home</a></li><li><a href="/trading-services.html">Services</a></li><li><a href="/contact.html">Contact</a></li></ul>
+    <p class="footer-copy">© 2024 Aconcagua Co., Ltd.</p>
+  </footer>
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  </script>
+</body>
+</html>
