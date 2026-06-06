@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ワイン / Wine — Aconcagua Co.,Ltd.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Outfit:wght@300;400;500&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #9B804A; --gold-light: #C4A96B; --black: #0A0A0A; --off-black: #111111;
+      --surface: #161616; --text-primary: #F0EDE6; --text-secondary: #A09A8E;
+      --text-muted: #5A5550; --border: rgba(155,128,74,0.2); --border-subtle: rgba(240,237,230,0.08);
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--black); color: var(--text-primary); font-family: 'Outfit', 'Noto Serif JP', sans-serif; font-weight: 300; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+    /* NAVBAR */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 4rem; height: 72px; background: rgba(10,10,10,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--border-subtle); }
+    .nav-logo { display: flex; align-items: center; text-decoration: none; }
+    .nav-logo svg { width: 36px; height: 36px; filter: brightness(0) invert(1); transition: opacity 0.2s; }
+    .nav-logo:hover svg { opacity: 0.7; }
+    .nav-links { display: flex; align-items: center; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'Outfit', sans-serif; font-weight: 400; font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); text-decoration: none; transition: color 0.2s; position: relative; }
+    .nav-links a::after { content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px; background: var(--gold); transition: width 0.3s ease; }
+    .nav-links a:hover { color: var(--text-primary); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--gold-light); }
+    .nav-links a.active::after { width: 100%; }
+    .nav-cta { color: var(--gold) !important; border: 1px solid var(--border); padding: 8px 20px; border-radius: 2px; }
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--gold) !important; color: var(--black) !important; }
+    .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .nav-hamburger span { display: block; width: 22px; height: 1px; background: var(--text-secondary); }
+
+    /* HERO */
+    .hero { padding-top: 72px; height: 100svh; min-height: 560px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background-image: url('https://images.unsplash.com/photo-1474722883778-792e7990302f?w=1800&q=80'); background-size: cover; background-position: center; filter: brightness(0.45) saturate(0.7); }
+    .hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(10,10,10,0.2) 0%, rgba(10,10,10,0.7) 100%); }
+    .hero-content { position: relative; text-align: center; padding: 0 2rem; animation: fadeUp 1.2s ease 0.3s both; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+    .hero-eyebrow { font-family: 'Noto Serif JP', serif; font-size: 0.78rem; letter-spacing: 0.2em; color: var(--gold); margin-bottom: 1.4rem; display: flex; align-items: center; justify-content: center; gap: 12px; }
+    .hero-eyebrow::before, .hero-eyebrow::after { content: ''; display: block; width: 28px; height: 1px; background: var(--gold); opacity: 0.6; }
+    .hero-title-jp { font-family: 'Noto Serif JP', serif; font-size: clamp(3.5rem, 8vw, 6rem); font-weight: 300; color: var(--text-primary); line-height: 1; margin-bottom: 0.4rem; }
+    .hero-title-en { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 2vw, 1.4rem); font-weight: 300; font-style: italic; color: var(--gold-light); letter-spacing: 0.12em; margin-bottom: 2rem; }
+    .hero-tagline { font-family: 'Noto Serif JP', serif; font-size: 0.82rem; color: var(--text-secondary); line-height: 1.9; max-width: 480px; margin: 0 auto; }
+
+    /* BACK BAR */
+    .back-bar { padding: 1.2rem 4rem; border-bottom: 1px solid var(--border-subtle); }
+    .back-link { display: inline-flex; align-items: center; gap: 8px; font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .back-link:hover { color: var(--gold-light); }
+    .back-link svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+
+    /* MISSION */
+    .mission { padding: 6rem 4rem; max-width: 880px; margin: 0 auto; text-align: center; border-bottom: 1px solid var(--border-subtle); }
+    .mission-jp { font-family: 'Noto Serif JP', serif; font-size: 1rem; line-height: 2.2; color: var(--text-secondary); margin-bottom: 1.8rem; }
+    .mission-en { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; line-height: 1.9; color: var(--text-muted); }
+
+    /* CATALOGUE CTA */
+    .catalogue-wrap { padding: 4rem; text-align: center; border-bottom: 1px solid var(--border-subtle); }
+    .btn-catalogue { display: inline-flex; align-items: center; gap: 12px; font-family: 'Outfit', sans-serif; font-size: 0.78rem; font-weight: 400; letter-spacing: 0.14em; text-transform: uppercase; color: var(--black); background: var(--gold); border: 1px solid var(--gold); padding: 16px 40px; border-radius: 2px; text-decoration: none; transition: opacity 0.25s; }
+    .btn-catalogue:hover { opacity: 0.85; }
+    .btn-catalogue svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 1.5; }
+    .catalogue-sub { font-family: 'Noto Serif JP', serif; font-size: 0.72rem; color: var(--text-muted); margin-top: 1rem; letter-spacing: 0.1em; }
+
+    /* ABOUT SECTION */
+    .about-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-bottom: 1px solid var(--border-subtle); }
+    .about-img { position: relative; overflow: hidden; min-height: 480px; }
+    .about-img img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(30%) brightness(0.7); display: block; }
+    .about-body { padding: 5rem 4rem; display: flex; flex-direction: column; justify-content: center; }
+    .section-label { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.4rem; display: flex; align-items: center; gap: 10px; }
+    .section-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
+    .about-text-jp { font-family: 'Noto Serif JP', serif; font-size: 0.88rem; line-height: 2.1; color: var(--text-secondary); margin-bottom: 1.6rem; }
+    .about-text-en { font-family: 'Cormorant Garamond', serif; font-size: 0.95rem; font-style: italic; line-height: 1.85; color: var(--text-muted); }
+
+    /* PARTNERS */
+    .partners-wrap { padding: 5rem 4rem; }
+    .partners-inner { max-width: 1000px; margin: 0 auto; }
+    .partners-header { text-align: center; margin-bottom: 3.5rem; }
+    .partners-title-jp { font-family: 'Noto Serif JP', serif; font-size: 1.4rem; font-weight: 300; color: var(--text-primary); margin-bottom: 0.3rem; }
+    .partners-title-en { font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-muted); }
+    .partners-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border-subtle); border: 1px solid var(--border-subtle); }
+    .partner-card { background: var(--off-black); padding: 3rem 2rem; text-align: center; transition: background 0.3s; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; min-height: 160px; }
+    .partner-card:hover { background: var(--surface); }
+    .partner-name { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 300; color: var(--text-primary); letter-spacing: 0.05em; }
+    .partner-sub { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted); }
+
+    /* FOOTER */
+    .footer-strip { border-top: 1px solid var(--border-subtle); padding: 3rem 4rem; display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+    .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 300; color: var(--text-secondary); }
+    .footer-brand strong { color: var(--text-primary); font-weight: 400; }
+    .footer-links { display: flex; gap: 2rem; list-style: none; }
+    .footer-links a { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--text-secondary); }
+    .footer-copy { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.06em; }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; position: fixed; inset: 72px 0 0 0; background: rgba(10,10,10,0.97); flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+      .nav-links.open { display: flex; }
+      .nav-hamburger { display: flex; }
+      .back-bar, .catalogue-wrap { padding: 1rem 1.5rem; }
+      .mission { padding: 4rem 1.5rem; }
+      .about-wrap { grid-template-columns: 1fr; }
+      .about-img { min-height: 280px; }
+      .about-body { padding: 3rem 1.5rem; }
+      .partners-wrap { padding: 4rem 1.5rem; }
+      .partners-grid { grid-template-columns: 1fr; }
+      .footer-strip { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <nav id="navbar">
+    <a href="/" class="nav-logo">
+      <svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-label="Aconcagua">
+        <polygon points="30,6 8,50 52,50" fill="none" stroke="white" stroke-width="2.5" stroke-linejoin="round"/>
+        <polygon points="30,6 20,28 40,28" fill="white"/>
+      </svg>
+    </a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="/#about">About</a></li>
+      <li><a href="/trading.html" class="active">Trading & Services</a></li>
+      <li><a href="/travel.html">Travel Services</a></li>
+      <li><a href="/founders.html">Our Founders</a></li>
+      <li><a href="/contact.html" class="nav-cta">Contact Us</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">アコンカグア トレーディング / Aconcagua Trading</p>
+      <h1 class="hero-title-jp">ワイン</h1>
+      <p class="hero-title-en">Argentine Wine</p>
+      <p class="hero-tagline">わたしたちは、生産者のワインにかける熱い想いを大切にします。<br>本物の味を追求するインポーターでありたいと思っています。</p>
+    </div>
+  </section>
+
+  <div class="back-bar">
+    <a href="/trading-comercial.html" class="back-link">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+      Back to Trading / トレーディングに戻る
+    </a>
+  </div>
+
+  <!-- MISSION -->
+  <div class="mission">
+    <p class="mission-jp">
+      自らアルゼンチンに足を運び、彼らが手入れをするブドウ畑から熟成させるまで、各ワイナリーのこだわりを熟知するところから始めます。実際にブドウ畑を訪れ、生産者と会話を交わすことで、彼らのワインへの想いやその生に込めた情熱を共有し、それを日本へと繋ぐことが私たちのミッションだと考えています。
+    </p>
+    <p class="mission-en">
+      We travel to Argentina ourselves — walking the vineyards, understanding each producer's craft, and sharing their passion with Japan.
+    </p>
+  </div>
+
+  <!-- CATALOGUE -->
+  <div class="catalogue-wrap">
+    <a href="/assets/catalogues/wine-catalogue.pdf" class="btn-catalogue" target="_blank">
+      <svg viewBox="0 0 24 24"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
+      Download Catalogue
+    </a>
+    <p class="catalogue-sub">カタログをダウンロード</p>
+  </div>
+
+  <!-- ABOUT WINES -->
+  <div class="about-wrap">
+    <div class="about-img">
+      <img src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=900&q=80" alt="Argentine wine">
+    </div>
+    <div class="about-body">
+      <p class="section-label">About / アルゼンチンワイン</p>
+      <p class="about-text-jp">
+        アメリカ大陸で最も大きな山脈のアンデスからの純粋な雪解け水でブドウが育っています。アルゼンチンのアンデス山脈の麓にあります。<br><br>
+        まだまだ日本では入手困難なアルゼンチン産ワイン。しかし気候や土壌に恵まれたアルゼンチンでは、ハイクオリティで魅力的なワインが多く造られています。<br><br>
+        わたしたちは、国際的品質が認められるローカル生産者と日本の架け橋となり、魅力あるアルゼンチンワインをお届けします。飲食店さんへは特別引きをいたします。ご注文をお待しております。
+      </p>
+      <p class="about-text-en">
+        Grown on snowmelt from the Andes — Argentina's exceptional terroir produces wines of remarkable quality, still largely undiscovered in Japan. We bridge that gap.
+      </p>
+    </div>
+  </div>
+
+  <!-- PARTNERS -->
+  <div class="partners-wrap">
+    <div class="partners-inner">
+      <div class="partners-header">
+        <p class="partners-title-jp">私たちのパートナー</p>
+        <p class="partners-title-en">Our Partners / Our Wineries</p>
+      </div>
+      <div class="partners-grid">
+        <div class="partner-card">
+          <p class="partner-name">Gen</p>
+          <p class="partner-sub">Fuerza Tranquila</p>
+        </div>
+        <div class="partner-card">
+          <p class="partner-name">Altar Uco</p>
+          <p class="partner-sub">Quiet Wines</p>
+        </div>
+        <div class="partner-card">
+          <p class="partner-name">Lorenzo de Agrelo</p>
+          <p class="partner-sub">Mendoza</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer-strip">
+    <div class="footer-brand"><strong>アコンカグア 株式会社</strong> — Aconcagua Co., Ltd.</div>
+    <ul class="footer-links">
+      <li><a href="/">Home</a></li>
+      <li><a href="/trading-comercial.html">Trading</a></li>
+      <li><a href="/contact.html">Contact Us</a></li>
+    </ul>
+    <p class="footer-copy">© 2024 Aconcagua Co., Ltd. — Kyoto, Japan</p>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
+  </script>
+</body>
+</html>
